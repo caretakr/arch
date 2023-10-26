@@ -61,6 +61,7 @@ _main() {
       keepassxc \
       kubectl \
       kvantum \
+      less \
       libfido2 \
       libnotify \
       libsecret \
