@@ -34,20 +34,20 @@ _welcome() {
     printf "  This script streamlines the Arch Linux installation by first checking necessary permissions and dependencies. It ensures Git is available and installs it if missing. Next, it clones a repository with essential installation files. Once cloned, the repository's installer is executed, updating the user about each step via terminal messages.\n"
 }
 
-_step() {
-  printf "\n\033[1m> %s\033[0m\n\n" "$1"
+_log() {
+  printf "\n\033[1m# %s\033[0m\n\n" "$1"
 }
 
 _main() {
   _welcome
 
-  _step 'Fixing permissions...'
+  _log 'Fixing permissions...'
 
   ( set -x
     umask g-w,o-w
   ) || exit 3
 
-  _step 'Checking requirements...'
+  _log 'Checking requirements...'
 
   ( set -x
     (command -v "git" > /dev/null 2>&1) || {
@@ -60,7 +60,7 @@ _main() {
     }
   ) || exit 4
 
-  _step 'Cloning repository...'
+  _log 'Cloning repository...'
 
   ( set -x
     git clone \
@@ -81,7 +81,7 @@ _main() {
       }
   ) || exit 5
 
-  _step 'Running installer...'
+  _log 'Running installer...'
 
   cd "$INSTALL_HOME" \
     && ./bin/install.sh
