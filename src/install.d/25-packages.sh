@@ -134,7 +134,7 @@ _main() {
         && [ "$(dmidecode -s system-product-name)" = 'XPS 13 9310' ]
     then
       packages=" \
-        $system_packages \
+        $packages \
         iio-sensor-proxy \
         intel-media-driver \
       "
@@ -145,7 +145,7 @@ _main() {
         && [ "$(dmidecode -s system-product-name)" = 'MacBookPro9,2' ]
     then
       packages=" \
-        $system_packages \
+        $packages \
         broadcom-wl \
         libva-intel-driver \
       "
