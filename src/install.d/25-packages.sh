@@ -36,6 +36,7 @@ _main() {
       flatpak \
       foot \
       fwupd \
+      fzf \
       gammastep \
       git \
       gnome-themes-extra \
@@ -66,6 +67,7 @@ _main() {
       libnotify \
       libsecret \
       libvirt \
+      links \
       mako \
       mesa \
       minikube \
@@ -73,10 +75,12 @@ _main() {
       noto-fonts \
       noto-fonts-cjk \
       noto-fonts-emoji \
+      nvim \
       openbsd-netcat \
       openssh \
       pacman-contrib \
       pam-u2f \
+      parallel \
       pinentry \
       pipewire \
       pipewire-alsa \
@@ -106,12 +110,12 @@ _main() {
       swayidle \
       swaylock \
       swtpm \
+      tmux \
       trash-cli \
       ttf-firacode-nerd \
       udiskie \
       udisks2 \
       unarchiver \
-      vim \
       virt-manager \
       vulkan-intel \
       waybar \
@@ -122,6 +126,7 @@ _main() {
       xdg-desktop-portal-wlr \
       xdg-user-dirs \
       xorg-xwayland \
+      zoxide \
       zsh \
       zsh-autosuggestions \
       zsh-history-substring-search \
