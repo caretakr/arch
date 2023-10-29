@@ -3,4 +3,4 @@ Description=Rank mirrors
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/sh -c "/usr/bin/curl -s 'https://archlinux.org/mirrorlist/?protocol=https&use_mirror_status=on' | /usr/bin/sed -e 's/^#Server/Server/' -e '/^#/d' | /usr/bin/rankmirrors -n 0 - > /etc/pacman.d/mirrorlist"
+ExecStart=/usr/bin/sh -c "/usr/bin/curl -s 'https://archlinux.org/mirrorlist/?protocol=https&use_mirror_status=on' | /usr/bin/sed -e 's/^#Server/Server/' -e '/^#/d' | /usr/bin/rankmirrors -n 0 -p -m 15 - > /etc/pacman.d/mirrorlist"
