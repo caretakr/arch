@@ -8,9 +8,6 @@ _main() {
   (set -ex
     arch-chroot /mnt bootctl install
 
-    arch-chroot /mnt find /boot \
-      | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-
     arch-chroot /mnt tee /boot/loader/loader.conf \
       < $(dirname "$0")/../src/assets/boot/loader/loader.conf
 
@@ -25,9 +22,6 @@ _main() {
       -e "s/{{ root_uuid }}/$(blkid -s UUID -o value /dev/mapper/root)/g" \
       $(dirname "$0")/../src/assets/boot/loader/entries/arch-fallback.conf.tpl \
       | arch-chroot /mnt tee /boot/loader/entries/arch-fallback.conf
-
-    arch-chroot /mnt touch /root/.hushlogin /home/caretakr/.hushlogin
-    arch-chroot /mnt chown caretakr:caretakr /home/caretakr/.hushlogin
 
     arch-chroot /mnt setterm -cursor on >> /etc/issue
 
