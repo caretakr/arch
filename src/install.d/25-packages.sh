@@ -78,7 +78,6 @@ _main() {
       neovim \
       openbsd-netcat \
       openssh \
-      pacman-contrib \
       pam-u2f \
       parallel \
       pinentry \
@@ -100,6 +99,7 @@ _main() {
       qt6-base \
       qt6-svg \
       qt6-wayland \
+      reflector \
       rsync \
       slirp4netns \
       slurp \
