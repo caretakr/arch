@@ -75,7 +75,7 @@ _main() {
       noto-fonts \
       noto-fonts-cjk \
       noto-fonts-emoji \
-      nvim \
+      neovim \
       openbsd-netcat \
       openssh \
       pacman-contrib \
