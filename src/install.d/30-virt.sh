@@ -1,9 +1,9 @@
 ##
-## Virtualization
+## Virt
 ##
 
 _main() {
-  _log 'Setting virtualization...'
+  _log 'Setting virt...'
 
   (set -ex
     arch-chroot /mnt systemctl enable libvirtd.service
