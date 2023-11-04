@@ -33,6 +33,7 @@ _main() {
     arch-chroot /mnt tee /etc/systemd/system/getty@tty7.service.d/override.conf \
       < $(dirname "$0")/../src/assets/etc/systemd/system/getty@tty7.service.d/override.conf
 
-    arch-chroot /mnt systemctl enable getty@tty7.service
+    arch-chroot /mnt systemctl enable getty@tty7.service \
+      && arch-chroot /mnt systemctl disable getty@tty1.service
   ) || exit 50
 }
