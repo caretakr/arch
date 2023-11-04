@@ -69,6 +69,7 @@ _main() {
       libvirt \
       links \
       mako \
+      man \
       mesa \
       minikube \
       netavark \
