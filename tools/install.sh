@@ -38,6 +38,10 @@ _log() {
   printf "\n\033[1m# %s\033[0m\n\n" "$1"
 }
 
+_error() {
+  printf "\n\033[31m# %s \033[0m\n\n" "$1"
+}
+
 _main() {
   _welcome
 
@@ -51,12 +55,9 @@ _main() {
 
   ( set -x
     (command -v "git" > /dev/null 2>&1) || {
-      pacman -Sy \
-        --needed \
-        --noconfirm \
-        --ask=4 \
-        git \
-        glibc
+      _error "Git not found: exiting..."
+      
+      exit 1
     }
   ) || exit 4
 
