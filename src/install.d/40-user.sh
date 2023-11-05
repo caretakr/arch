@@ -18,6 +18,10 @@ _main() {
     printf "${user_password}\n${user_password}" | arch-chroot /mnt passwd caretakr
 
     arch-chroot /mnt sudo -u caretakr \
-      sh -c "git clone https://github.com/caretakr/dotfiles.git /home/caretakr"
+      sh -c " \
+        cd /home/caretakr \
+          && git clone https://github.com/caretakr/dotfiles.git . \
+          && git submodule update --init --recursive \
+      "
   ) || exit 48
 }
