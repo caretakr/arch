@@ -120,6 +120,7 @@ _main() {
       virt-manager \
       vulkan-intel \
       waybar \
+      wireguard-tools \
       wireplumber \
       wl-clipboard \
       xdg-desktop-portal \
