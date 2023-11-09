@@ -66,6 +66,7 @@ _main() {
       libfido2 \
       libnotify \
       libsecret \
+      libsodium \
       libvirt \
       links \
       mako \
@@ -91,6 +92,7 @@ _main() {
       podman \
       polkit \
       polkit-gnome \
+      privoxy \
       qemu-full \
       qemu-user-static \
       qemu-user-static-binfmt \
@@ -102,6 +104,7 @@ _main() {
       qt6-wayland \
       reflector \
       rsync \
+      shadowsocks \
       slirp4netns \
       slurp \
       sof-firmware \
