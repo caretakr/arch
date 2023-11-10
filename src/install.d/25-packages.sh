@@ -103,6 +103,7 @@ _main() {
       qt6-svg \
       qt6-wayland \
       reflector \
+      ripgrep \
       rsync \
       shadowsocks \
       slirp4netns \
