@@ -15,9 +15,9 @@ _main() {
   _log 'Setting snapshots...'
 
   (set -ex
-    mkdir -p /opt/caretakr/snapshot
+    arch-chroot /mnt mkdir -p /opt/caretakr/snapshot
 
-    git clone https://github.com/caretakr/snapshot.git \
+    arch-chroot /mnt git clone https://github.com/caretakr/snapshot.git \
       /opt/caretakr/snapshot
 
     arch-chroot /mnt mkdir -p /etc/snapshot
