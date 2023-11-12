@@ -40,7 +40,6 @@ _main() {
     for period in \
       hourly \
       daily \
-      weekly \
     ; do
       case "$period" in
         hourly) 
@@ -53,16 +52,11 @@ _main() {
           timer='*-*-* 21:00:00'
           
           ;;
-        weekly)
-          retention=4
-          timer='Sun *-*-* 21:00:00'
-          
-          ;;
       esac
       
       sed \
+        -e "s/{{ retention }}/${retention}/g" \
         -e "s/{{ period }}/${period}/g" \
-        -e "s/{{ tag }}/${retention}/g" \
         $(dirname "$0")/../src/assets/etc/systemd/system/-snapshot@.service.tpl \
         | arch-chroot /mnt tee /etc/systemd/system/${period}-snapshot@.service
 
