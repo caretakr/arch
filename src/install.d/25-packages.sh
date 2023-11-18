@@ -38,6 +38,7 @@ _main() {
       fwupd \
       fzf \
       gammastep \
+      gcr \
       git \
       gnome-themes-extra \
       gnupg \
@@ -121,6 +122,7 @@ _main() {
       udiskie \
       udisks2 \
       unarchiver \
+      unzip \
       virt-manager \
       vulkan-intel \
       waybar \
