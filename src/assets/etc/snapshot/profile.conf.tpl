@@ -1,2 +1,0 @@
-DEVICE={{ device }}
-SUBVOLUME={{ subvolume }}

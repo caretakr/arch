@@ -82,7 +82,7 @@ _main() {
       }
   ) || exit 5
 
-  _log 'Running installer...'
+  _log 'Running install...'
 
   cd "$INSTALL_HOME" \
     && ./bin/install.sh
