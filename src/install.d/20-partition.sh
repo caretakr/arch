@@ -86,9 +86,16 @@ _main() {
 
   (set -ex
     mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
-    mkfs.ext4 -F "/dev/${BOOT_PARTITION}"
+
+    mkfs.ext4 -F "/dev/${BOOT_PARTITION}" \
+      && tune2fs -m 1 "/dev/${BOOT_PARTITION}"
+
     mkfs.ext2 -F "/dev/${SWAP_PARTITION}" 1M
-    mkfs.ext4 -F "/dev/mapper/luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
+
+    _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
+
+    mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}" \
+      && tune2fs -m 1 "/dev/mapper/luks-${_data_uuid}"
   ) || exit 104
 
   _log 'Mounting partitions...'
@@ -105,9 +112,11 @@ _main() {
       "/dev/${BOOT_PARTITION}" \
       /mnt/boot
 
+    mkdir -p /mnt/efi
+
     mount \
       -o rw,nodev,noexec,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro \
-      "/dev/${BOOT_PARTITION}" \
+      "/dev/${EFI_PARTITION}" \
       /mnt/efi
 
     umount /mnt
