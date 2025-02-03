@@ -20,7 +20,10 @@ _main() {
     arch-chroot /mnt sudo -u caretakr \
       sh -c " \
         cd /home/caretakr \
-          && git clone https://github.com/caretakr/dotfiles.git . \
+          && git init \
+          && git remote add origin https://github.com/caretakr/dotfiles.git \
+          && git fetch origin \
+          && git reset --hard origin/master \
           && git submodule update --init --recursive \
       "
   ) || exit 500
