@@ -159,7 +159,7 @@ _main() {
     then
       _packages=" \
         $_packages \
-        broadcom-wl \
+        broadcom-wl-dkms \
         libva-intel-driver \
       "
     fi
@@ -192,6 +192,7 @@ EOF
   (set -ex
     _packages="
       paru-bin \
+      zsh-theme-powerlevel10k-git \
     "
 
     for _package in $_packages; do
