@@ -168,7 +168,7 @@ _main() {
       --needed \
       --noconfirm \
       --ask=4 \
-      $packages
+      $_packages
   ) || exit 351
 
   _log 'Creating install user...'
