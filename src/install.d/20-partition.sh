@@ -77,10 +77,8 @@ _main() {
     printf "$DATA_PASSWORD" | cryptsetup luksFormat --sector-size=4096 \
       "/dev/${DATA_PARTITION}" -d - \
 
-    _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
-
     printf "$DATA_PASSWORD" | cryptsetup luksOpen \
-      "/dev/${DATA_PARTITION}" "luks-${_data_uuid}" -d -
+      "/dev/${DATA_PARTITION}" "luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")" -d -
 
   ) || exit 103
 
@@ -90,7 +88,7 @@ _main() {
     mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
     mkfs.ext4 -F "/dev/${BOOT_PARTITION}"
     mkfs.ext2 -F "/dev/${SWAP_PARTITION}" 1M
-    mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}"
+    mkfs.ext4 -F "/dev/mapper/luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
   ) || exit 104
 
   _log 'Mounting partitions...'
@@ -98,7 +96,7 @@ _main() {
   (set -ex
     mount \
       -o rw,errors=remount-ro \
-      "/dev/mapper/luks-${_data_uuid}" /mnt
+      "/dev/mapper/luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")" /mnt
 
     mkdir -p /mnt/boot
 
