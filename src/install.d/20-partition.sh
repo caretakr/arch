@@ -88,9 +88,9 @@ _main() {
 
   (set -ex
     mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
-    mkfs.ext4 -f "/dev/${BOOT_PARTITION}"
+    mkfs.ext4 -F "/dev/${BOOT_PARTITION}"
     mkfs.ext2 -F "/dev/${SWAP_PARTITION}" 1M
-    mkfs.ext4 -f "/dev/mapper/luks-${_data_uuid}"
+    mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}"
   ) || exit 104
 
   _log 'Mounting partitions...'
