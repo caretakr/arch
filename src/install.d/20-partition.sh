@@ -21,7 +21,7 @@ _main() {
   _boot_size="$((1*1536*2048))"
 
   _swap_start="$((${_boot_start}+${_boot_size}))"
-  _swap_size="$(dmidecode -t 17 | grep "Size.*GB" | awk '{s+=$2} END {print s * 1024 * 2.5 * 2048}')"
+  _swap_size="$(dmidecode -t 17 | grep "Size.*GB" | awk '{s+=$2} END {print s * 1024 * 1.5 * 2048}')"
 
   _data_start="$((${_swap_start}+${_swap_size}))"
 
