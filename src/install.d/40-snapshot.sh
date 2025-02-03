@@ -11,9 +11,9 @@ _main() {
   #   root \
   #   var \
   # "
-  #
-  # _log 'Setting snapshots...'
-  #
+
+  _log 'Setting snapshots...'
+
   # (set -ex
   #   arch-chroot /mnt mkdir -p /opt/caretakr/snapshot
   #
