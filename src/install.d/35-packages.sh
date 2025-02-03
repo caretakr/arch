@@ -138,8 +138,7 @@ _main() {
       zsh \
       zsh-autosuggestions \
       zsh-history-substring-search \
-      zsh-syntax-highlighting \
-      zsh-theme-powerlevel10k \
+      zsh-syntax-highlighting
     "
 
     if \
