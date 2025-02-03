@@ -118,7 +118,5 @@ _main() {
       -o rw,nodev,noexec,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro \
       "/dev/${EFI_PARTITION}" \
       /mnt/efi
-
-    umount /mnt
   ) || exit 105
 }
