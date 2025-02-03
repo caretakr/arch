@@ -70,6 +70,8 @@ _main() {
       libsodium \
       libvirt \
       links \
+      linux-lts \
+      linux-zen \
       mako \
       man \
       mesa \
