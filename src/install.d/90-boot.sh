@@ -15,6 +15,16 @@ _main() {
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
+      $(dirname "$0")/../src/assets/boot/loader/entries/linux.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/linux.conf
+
+    sed \
+      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
+      $(dirname "$0")/../src/assets/boot/loader/entries/linux-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/linux-fallback.conf
+
+    sed \
+      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
       $(dirname "$0")/../src/assets/boot/loader/entries/linux-lts.conf.tpl \
       | arch-chroot /mnt tee /boot/loader/entries/linux-lts.conf
 
@@ -23,15 +33,6 @@ _main() {
       $(dirname "$0")/../src/assets/boot/loader/entries/linux-lts-fallback.conf.tpl \
       | arch-chroot /mnt tee /boot/loader/entries/linux-lts-fallback.conf
 
-    sed \
-      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-stable.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-stable.conf
-
-    sed \
-      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-stable-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-stable-fallback.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
