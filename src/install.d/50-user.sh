@@ -15,7 +15,7 @@ _main() {
 
     # arch-chroot /mnt chown caretakr:caretakr /home/caretakr
 
-    printf "${user_password}\n${user_password}" | arch-chroot /mnt passwd caretakr
+    printf "${USER_PASSWORD}\n${USER_PASSWORD}" | arch-chroot /mnt passwd caretakr
 
     arch-chroot /mnt sudo -u caretakr \
       sh -c " \

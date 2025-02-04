@@ -85,16 +85,16 @@ _main() {
   _log 'Formatting partitions...'
 
   (set -ex
-    mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
+    mkfs.fat -F 32 -S 4096 "/dev/${EFI_PARTITION}"
 
-    mkfs.ext4 -F "/dev/${BOOT_PARTITION}" \
+    mkfs.ext4 -F -b 4096 "/dev/${BOOT_PARTITION}" \
       && tune2fs -m 1 "/dev/${BOOT_PARTITION}"
 
-    mkfs.ext2 -F "/dev/${SWAP_PARTITION}" 1M
+    mkfs.ext2 -F -b 4096 "/dev/${SWAP_PARTITION}" 1M
 
     _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
 
-    mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}" \
+    mkfs.ext4 -F -b 4096 "/dev/mapper/luks-${_data_uuid}" \
       && tune2fs -m 1 "/dev/mapper/luks-${_data_uuid}"
   ) || exit 104
 
