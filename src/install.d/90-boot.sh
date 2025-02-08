@@ -102,4 +102,6 @@ _main() {
     arch-chroot /mnt systemctl enable getty@tty7.service \
       && arch-chroot /mnt systemctl disable getty@tty1.service
   ) || exit 902
+
+  rm -rf "$_rescue_workdir"
 }

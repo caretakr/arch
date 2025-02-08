@@ -223,4 +223,6 @@ EOF
   (set -ex
     arch-chroot /mnt userdel -r install
   ) || exit 357
+
+  rm -rf "$_install_home"
 }
