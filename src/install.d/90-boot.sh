@@ -8,10 +8,7 @@ _main() {
   _arch_version="$(date +%Y.%m).01"
   _grml_version="2024.12"
 
-  _rescue_workdir="$(mktemp -d -p /var/tmp -t rescue-XXXXXXXX)" \
-    && mkdir -p "/mnt$(dirname "$_rescue_workdir")" \
-    && mv "$_rescue_workdir" "/mnt$_rescue_workdir" \
-    && ln -s "/mnt$_rescue_workdir" "$_rescue_workdir"
+  _rescue_workdir="$(mktemp -d -p /var/tmp -t rescue-XXXXXXXX)"
 
   _log 'Setting boot...'
 
@@ -65,11 +62,10 @@ _main() {
       && arch-chroot /mnt systemctl disable getty@tty1.service
   ) || exit 900
 
-  _log 'Setting rescues...'
+  _log 'Setting rescue...'
 
   (set -ex
-    mkdir -p "$_rescue_workdir/arch" \
-      cd "$_rescue_workdir/arch"
+    cd "/mnt$_rescue_workdir"
 
     curl -fsSL \
       -o "archlinux-${_arch_version}-x86_64.iso" \
@@ -82,36 +78,15 @@ _main() {
 
     install -d /boot/arch
 
-    install arch/boot/x86_64/initramfs-linux.img /boot/arch/initramfs-linux.img
-    install arch/boot/x86_64/vmlinuz-linux /boot/arch/vmlinuz-linux
-    install arch/x86_64/airootfs.sfs /boot/arch/airootfs.sfs
+    install arch/boot/x86_64/initramfs-linux.img /boot/rescue/initramfs-linux.img
+    install arch/boot/x86_64/vmlinuz-linux /boot/rescue/vmlinuz-linux
+    install arch/x86_64/airootfs.sfs /boot/rescue/airootfs.sfs
 
-    arch-chroot /mnt tee /boot/loader/entries/arch.conf \
-      < $(dirname "$0")/../src/assets/boot/loader/entries/arch.conf
-
-    mkdir -p "$_rescue_workdir/grml" \
-      cd "$_rescue_workdir/grml"
-
-    curl -fsSL \
-      -o "grml64-small_${_grml_version}.iso" \
-      "https://download.grml.org/grml64-small_${_grml_version}.iso"
-
-    bsdtar xf "grml64-small_${_grml_version}.iso" \
-      boot/grml64small/vmlinuz \
-      boot/grml64small/initrd.img \
-      live/grml64-small/grml64-small.squashfs
-
-    install -d /boot/grml
-
-    install boot/grml64small/vmlinuz /boot/grml/vmlinuz
-    install boot/grml64small/initrd.img /boot/grml/initrd.img
-    install live/grml64-small/grml64-small.squashfs /boot/grml/grml64-small.squashfs
-
-    arch-chroot /mnt tee /boot/loader/entries/grml.conf \
-      < $(dirname "$0")/../src/assets/boot/loader/entries/grml.conf
+    arch-chroot /mnt tee /boot/loader/entries/rescue.conf \
+      < $(dirname "$0")/../src/assets/boot/loader/entries/rescue.conf
   ) || exit 901
 
-  _log 'Setting silent boot...'
+  _log 'Setting silent...'
 
   (set -ex
     arch-chroot /mnt setterm -cursor on >> /etc/issue
