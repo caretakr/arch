@@ -9,8 +9,8 @@ After=-.mount
 [Mount]
 What=/dev/disk/by-uuid/{{ boot_uuid }}
 Where=/boot
-Type=ext4
-Options=rw,nosuid,nodev,noexec,errors=remount-ro
+Type=vfat
+Options=rw,nodev,noexec,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro
 
 [Install]
 WantedBy=local-fs.target
