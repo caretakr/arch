@@ -14,7 +14,7 @@ if [ "$(uname)" != 'Linux' ]; then
   echo 'Only supported on Linux: exiting...'; exit 1
 fi
 
-INSTALL_HOME="$(mktemp -d -t install-XXXXXXXX)"
+INSTALL_HOME="$(mktemp -d -p /var/tmp -t install-XXXXXXXX)"
 
 _cleanup() {
   rm -rf "$INSTALL_HOME"

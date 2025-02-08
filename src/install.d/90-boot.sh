@@ -8,7 +8,7 @@ _main() {
   _arch_version="$(date +%Y.%m).01"
   _grml_version="2024.12"
 
-  _rescue_workdir="$(mktemp -d -t /var/tmp/rescue-XXXXXXXX)" \
+  _rescue_workdir="$(mktemp -d -p /var/tmp -t rescue-XXXXXXXX)" \
     && mkdir -p "/mnt$(dirname "$_rescue_workdir")" \
     && mv "$_rescue_workdir" "/mnt$_rescue_workdir" \
     && ln -s "/mnt$_rescue_workdir" "$_rescue_workdir"
