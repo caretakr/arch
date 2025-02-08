@@ -3,10 +3,7 @@
 ##
 
 _main() {
-  _install_home="$(mktemp -d -p /var/tmp -t install-XXXXXXXX)" \
-    && mkdir -p "/mnt$(dirname "$_install_home")" \
-    && mv "$_install_home" "/mnt$_install_home" \
-    && ln -s "/mnt$_install_home" "$_install_home"
+  _install_home="$(mktemp -du -p /var/tmp -t install-XXXXXXXX)"
 
   _log 'Refreshing pacman keys...'
 
