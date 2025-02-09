@@ -8,7 +8,7 @@ _main() {
   _arch_version="$(date +%Y.%m).01"
   _grml_version="2024.12"
 
-  _rescue_workdir="$(mktemp -p /var/tmp -t rescue-XXXXXXXX)"
+  _rescue_workdir="$(mktemp -d -p /mnt/var/tmp -t rescue-XXXXXXXX)"
 
   _log 'Setting boot...'
 
@@ -65,7 +65,7 @@ _main() {
   _log 'Setting rescue...'
 
   (set -ex
-    cd "/mnt$_rescue_workdir"
+    cd "$_rescue_workdir"
 
     curl -fsSL \
       -o "archlinux-${_arch_version}-x86_64.iso" \
