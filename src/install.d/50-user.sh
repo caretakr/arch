@@ -6,14 +6,10 @@ _main() {
   _log 'Setting user...'
 
   (set -ex
-    # arch-chroot /mnt chmod -v 0750 /home/caretakr
-
     arch-chroot /mnt useradd -m \
       -G wheel \
       -s /bin/zsh \
       caretakr
-
-    # arch-chroot /mnt chown caretakr:caretakr /home/caretakr
 
     printf "${USER_PASSWORD}\n${USER_PASSWORD}" | arch-chroot /mnt passwd caretakr
 
