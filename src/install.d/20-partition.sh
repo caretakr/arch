@@ -87,7 +87,9 @@ _main() {
   (set -ex
     mkfs.fat -F 32 -S 4096 "/dev/${EFI_PARTITION}"
     mkfs.fat -F 32 -S 4096 "/dev/${BOOT_PARTITION}"
-    mkfs.ext2 -F -b 4096 "/dev/${SWAP_PARTITION}" 1M
+
+    mkfs.ext2 -F -b 4096 "/dev/${SWAP_PARTITION}" 1M \
+      && tune2fs -m 0 "/dev/${SWAP_PARTITION}"
 
     _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
 

@@ -5,11 +5,6 @@
 _main() {
   _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
 
-  _arch_version="$(date +%Y.%m).01"
-  _grml_version="2024.12"
-
-  _rescue_workdir="$(mktemp -d -p /mnt/var/tmp -t rescue-XXXXXXXX)"
-
   _log 'Setting boot...'
 
   (set -ex
@@ -49,34 +44,6 @@ _main() {
       | arch-chroot /mnt tee /boot/loader/entries/linux-zen-fallback.conf
   ) || exit 900
 
-  _log 'Installing rescue...'
-
-  (set -ex
-    cd "$_rescue_workdir"
-
-    curl -fsSL \
-      -o "archlinux-${_arch_version}-x86_64.iso" \
-      "https://geo.mirror.pkgbuild.com/iso/${_arch_version}/archlinux-${_arch_version}-x86_64.iso"
-
-    bsdtar xf "archlinux-${_arch_version}-x86_64.iso" \
-      "arch/boot/x86_64/initramfs-linux.img" \
-      "arch/boot/x86_64/vmlinuz-linux" \
-      "arch/x86_64/airootfs.sfs"
-
-    install -d /mnt/boot/rescue
-
-    install arch/boot/x86_64/initramfs-linux.img /mnt/boot/rescue/initramfs-linux.img
-    install arch/boot/x86_64/vmlinuz-linux /mnt/boot/rescue/vmlinuz-linux
-    install arch/x86_64/airootfs.sfs /mnt/boot/rescue/airootfs.sfs
-  ) || exit 901
-
-  _log 'Setting rescue...'
-
-  (set -ex
-    arch-chroot /mnt tee /boot/loader/entries/rescue.conf \
-      < $(dirname "$0")/../src/assets/boot/loader/entries/rescue.conf
-  ) || exit 902
-
   _log 'Setting silent...'
 
   (set -ex
@@ -92,7 +59,5 @@ _main() {
 
     arch-chroot /mnt systemctl enable getty@tty7.service \
       && arch-chroot /mnt systemctl disable getty@tty1.service
-  ) || exit 903
-
-  rm -rf "$_rescue_workdir"
+  ) || exit 901
 }
