@@ -47,22 +47,9 @@ _main() {
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
       $(dirname "$0")/../src/assets/boot/loader/entries/linux-zen-fallback.conf.tpl \
       | arch-chroot /mnt tee /boot/loader/entries/linux-zen-fallback.conf
-
-    arch-chroot /mnt setterm -cursor on >> /etc/issue
-
-    arch-chroot /mnt tee /etc/sysctl.d/20-quiet.conf \
-      < $(dirname "$0")/../src/assets/etc/sysctl.d/20-quiet.conf
-
-    mkdir -p /mnt/etc/systemd/system/getty@tty7.service.d
-
-    arch-chroot /mnt tee /etc/systemd/system/getty@tty7.service.d/override.conf \
-      < $(dirname "$0")/../src/assets/etc/systemd/system/getty@tty7.service.d/override.conf
-
-    arch-chroot /mnt systemctl enable getty@tty7.service \
-      && arch-chroot /mnt systemctl disable getty@tty1.service
   ) || exit 900
 
-  _log 'Setting rescue...'
+  _log 'Installing rescue...'
 
   (set -ex
     cd "$_rescue_workdir"
@@ -81,10 +68,14 @@ _main() {
     install arch/boot/x86_64/initramfs-linux.img /mnt/boot/rescue/initramfs-linux.img
     install arch/boot/x86_64/vmlinuz-linux /mnt/boot/rescue/vmlinuz-linux
     install arch/x86_64/airootfs.sfs /mnt/boot/rescue/airootfs.sfs
+  ) || exit 901
 
+  _log 'Setting rescue...'
+
+  (set -ex
     arch-chroot /mnt tee /boot/loader/entries/rescue.conf \
       < $(dirname "$0")/../src/assets/boot/loader/entries/rescue.conf
-  ) || exit 901
+  ) || exit 902
 
   _log 'Setting silent...'
 
@@ -101,7 +92,7 @@ _main() {
 
     arch-chroot /mnt systemctl enable getty@tty7.service \
       && arch-chroot /mnt systemctl disable getty@tty1.service
-  ) || exit 902
+  ) || exit 903
 
   rm -rf "$_rescue_workdir"
 }
