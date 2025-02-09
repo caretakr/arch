@@ -76,11 +76,11 @@ _main() {
       "arch/boot/x86_64/vmlinuz-linux" \
       "arch/x86_64/airootfs.sfs"
 
-    install -d /boot/arch
+    install -d /mnt/boot/rescue
 
-    install arch/boot/x86_64/initramfs-linux.img /boot/rescue/initramfs-linux.img
-    install arch/boot/x86_64/vmlinuz-linux /boot/rescue/vmlinuz-linux
-    install arch/x86_64/airootfs.sfs /boot/rescue/airootfs.sfs
+    install arch/boot/x86_64/initramfs-linux.img /mnt/boot/rescue/initramfs-linux.img
+    install arch/boot/x86_64/vmlinuz-linux /mnt/boot/rescue/vmlinuz-linux
+    install arch/x86_64/airootfs.sfs /mnt/boot/rescue/airootfs.sfs
 
     arch-chroot /mnt tee /boot/loader/entries/rescue.conf \
       < $(dirname "$0")/../src/assets/boot/loader/entries/rescue.conf
