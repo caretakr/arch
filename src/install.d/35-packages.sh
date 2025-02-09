@@ -118,6 +118,7 @@ _main() {
       swayidle \
       swaylock \
       swtpm \
+      terminus-font \
       tmux \
       trash-cli \
       ttf-firacode-nerd \

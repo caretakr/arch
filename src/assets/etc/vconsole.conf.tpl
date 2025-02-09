@@ -1,2 +1,2 @@
-FONT=TER16x32
+FONT={{ font }}
 KEYMAP={{ keymap }}
