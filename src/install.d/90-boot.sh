@@ -8,7 +8,7 @@ _main() {
   _arch_version="$(date +%Y.%m).01"
   _grml_version="2024.12"
 
-  _rescue_workdir="$(mktemp -d -p /var/tmp -t rescue-XXXXXXXX)"
+  _rescue_workdir="$(mktemp -p /var/tmp -t rescue-XXXXXXXX)"
 
   _log 'Setting boot...'
 
