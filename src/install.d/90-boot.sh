@@ -15,33 +15,33 @@ _main() {
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-stable.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-stable.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-fallback.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-stable-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-stable-fallback.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-lts.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-lts.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-lts.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-lts.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-lts-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-lts-fallback.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-lts-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-lts-fallback.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-zen.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-zen.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-zen.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-zen.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/linux-zen-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/linux-zen-fallback.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-zen-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-zen-fallback.conf
   ) || exit 900
 
   _log 'Setting silent...'

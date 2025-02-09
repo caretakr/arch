@@ -161,7 +161,7 @@ _main() {
     then
       _packages=" \
         $_packages \
-        broadcom-wl-dkms \
+        broadcom-wl \
         libva-intel-driver \
       "
     fi
