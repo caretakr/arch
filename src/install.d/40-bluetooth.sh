@@ -12,6 +12,5 @@ _main() {
       < $(dirname "$0")/../src/assets/etc/systemd/system/bluetooth-toggle.service
 
     arch-chroot /mnt systemctl enable bluetooth-toggle.service
-  ) || exit 401
+  ) || exit
 }
-

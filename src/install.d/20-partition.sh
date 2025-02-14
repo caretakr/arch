@@ -1,5 +1,5 @@
 ##
-## Partition
+## Storage
 ##
 
 _main() {
@@ -31,7 +31,7 @@ _main() {
     /mnt
   "
 
-  _log 'Closing dangled mounts...'
+  _log 'Setting storage...'
 
   ( set -ex
     for _mount in $_mounts; do
@@ -47,11 +47,7 @@ _main() {
 
       cryptsetup close "luks-${_data_uuid}"
     fi
-  ) || exit 101
 
-  _log 'Partitioning device...'
-
-  ( set -ex
     sed \
       -e "s/{{ boot_partition }}/${BOOT_PARTITION}/g" \
       -e "s/{{ boot_size }}/${_boot_size}/g" \
@@ -69,22 +65,13 @@ _main() {
       | sfdisk "/dev/${STORAGE_DEVICE}"
 
     sleep 1 # Wait a little to sync properly
-  ) || exit 102
 
-  _log 'Encrypting partitions...'
-
-  (set -ex
     printf "$DATA_PASSWORD" | cryptsetup luksFormat \
       "/dev/${DATA_PARTITION}" -d - \
 
     printf "$DATA_PASSWORD" | cryptsetup luksOpen \
       "/dev/${DATA_PARTITION}" "luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")" -d -
 
-  ) || exit 103
-
-  _log 'Formatting partitions...'
-
-  (set -ex
     mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
     mkfs.fat -F 32 "/dev/${BOOT_PARTITION}"
 
@@ -95,11 +82,7 @@ _main() {
 
     mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}" \
       && tune2fs -m 1 "/dev/mapper/luks-${_data_uuid}"
-  ) || exit 104
 
-  _log 'Mounting partitions...'
-
-  (set -ex
     mount \
       -o rw,errors=remount-ro \
       "/dev/mapper/luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")" /mnt
@@ -107,15 +90,15 @@ _main() {
     mkdir -p /mnt/boot
 
     mount \
-      -o rw,nosuid,nodev,noexec,errors=remount-ro \
+      -o rw,noexec,nosuid,nodev,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro \
       "/dev/${BOOT_PARTITION}" \
       /mnt/boot
 
     mkdir -p /mnt/efi
 
     mount \
-      -o rw,nodev,noexec,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro \
+      -o rw,noexec,nosuid,nodev,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro \
       "/dev/${EFI_PARTITION}" \
       /mnt/efi
-  ) || exit 105
+  ) || exit
 }

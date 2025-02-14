@@ -15,12 +15,11 @@ _main() {
 
     arch-chroot /mnt sudo -u caretakr \
       sh -c " \
-        cd /home/caretakr \
-          && git init \
-          && git remote add origin https://github.com/caretakr/dotfiles.git \
-          && git fetch origin \
-          && git reset --hard origin/master \
-          && git submodule update --init --recursive \
+        git clone --bare https://github.com/caretakr/dotfiles.git /home/caretakr/.dotfiles \
+          && alias dotfiles='/usr/bin/git --git-dir=\"/home/caretakr/.dotfiles/\" --work-tree=\"/home/caretakr\"' \
+          && dotfiles checkout -f \
+          && dotfiles submodule update --init --recursive \
+          && dotfiles config --local status.showUntrackedFiles no
       "
-  ) || exit 500
+  ) || exit
 }

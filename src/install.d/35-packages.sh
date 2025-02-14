@@ -12,7 +12,7 @@ _main() {
 
     arch-chroot /mnt pacman-key --init
     arch-chroot /mnt pacman-key --populate archlinux
-  ) || exit 350
+  ) || exit
 
   _log 'Installing system packages...'
 
@@ -26,15 +26,20 @@ _main() {
       bluez-utils \
       brightnessctl \
       btop \
-      btrfs-progs \
+      buildah \
+      clang \
       cliphist \
+      crane \
+      delve \
+      dive \
       dmidecode \
       dnsmasq \
       dosfstools \
       efibootmgr \
+      exfatprogs \
       firewalld \
-      flatpak \
       foot \
+      fscrypt \
       fwupd \
       fzf \
       gammastep \
@@ -42,6 +47,8 @@ _main() {
       git \
       gnome-themes-extra \
       gnupg \
+      go \
+      gopls \
       grim \
       grml-zsh-config \
       gst-libav \
@@ -58,12 +65,15 @@ _main() {
       intel-ucode \
       iptables-nft \
       iwd \
+      jdk-openjdk \
       jq \
       kanshi \
       keepassxc \
       kubectl \
       kvantum \
+      ldd \
       less \
+      libc++ \
       libfido2 \
       libnotify \
       libsecret \
@@ -73,7 +83,8 @@ _main() {
       linux-lts \
       linux-zen \
       mako \
-      man \
+      man-db \
+      man-pages \
       mesa \
       minikube \
       netavark \
@@ -85,6 +96,7 @@ _main() {
       openssh \
       pam-u2f \
       parallel \
+      passt \
       pinentry \
       pipewire \
       pipewire-alsa \
@@ -109,7 +121,6 @@ _main() {
       ripgrep \
       rsync \
       shadowsocks \
-      slirp4netns \
       slurp \
       sof-firmware \
       sudo \
@@ -119,6 +130,7 @@ _main() {
       swaylock \
       swtpm \
       terminus-font \
+      textinfo \
       tmux \
       trash-cli \
       ttf-firacode-nerd \
@@ -171,7 +183,7 @@ _main() {
       --noconfirm \
       --ask=4 \
       $_packages
-  ) || exit 351
+  ) || exit
 
   _log 'Creating install user...'
 
@@ -179,7 +191,7 @@ _main() {
     arch-chroot /mnt useradd -mr \
       -d "$_install_home" \
       install
-  ) || exit 352
+  ) || exit
 
   _log 'Adding temporary sudo...'
 
@@ -187,12 +199,13 @@ _main() {
     cat <<EOF | arch-chroot /mnt tee /etc/sudoers.d/90-install
 install ALL=(ALL) NOPASSWD: ALL
 EOF
-  ) || exit 353
+  ) || exit
 
   _log 'Installing AUR packages...'
 
   (set -ex
     _packages="
+      downgrade \
       paru-bin \
       zsh-theme-powerlevel10k-git \
     "
@@ -205,25 +218,25 @@ EOF
           && makepkg -si --needed --noconfirm \
       "
     done
-  ) || exit 354
+  ) || exit
 
   _log 'Generating paru devel database...'
 
   (set -ex
     arch-chroot /mnt paru --gendb
-  ) || exit 355
+  ) || exit
 
   _log 'Removing temporary sudo...'
 
   (set -ex
     arch-chroot /mnt rm -rf /etc/sudoers.d/90-install
-  ) || exit 356
+  ) || exit
 
   _log 'Removing install user...'
 
   (set -ex
     arch-chroot /mnt userdel -r install
-  ) || exit 357
+  ) || exit
 
   rm -rf "$_install_home"
 }

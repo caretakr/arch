@@ -30,8 +30,7 @@ _main() {
       $(dirname "$0")/../src/assets/etc/systemd/system/-.mount.tpl \
       | arch-chroot /mnt tee /etc/systemd/system/-.mount
 
-    arch-chroot /mnt \
-      systemctl enable -- -.mount
+    arch-chroot /mnt systemctl enable -- -.mount
 
     sed \
       -e "s/{{ boot_blockdev_target }}/${_boot_blockdev_target}/g" \
@@ -63,5 +62,5 @@ _main() {
       < $(dirname "$0")/../src/assets/etc/systemd/system/dev-mapper-swap.swap
 
     arch-chroot /mnt systemctl enable dev-mapper-swap.swap
-  ) || exit 403
+  ) || exit
 }

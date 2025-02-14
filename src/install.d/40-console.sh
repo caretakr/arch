@@ -22,5 +22,5 @@ _main() {
       -e "s/{{ font }}/${_font}/g" \
       $(dirname "$0")/../src/assets/etc/vconsole.conf.tpl \
       | arch-chroot /mnt tee /etc/vconsole.conf
-  ) || exit 402
+  ) || exit
 }

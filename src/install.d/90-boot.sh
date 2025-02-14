@@ -42,11 +42,7 @@ _main() {
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
       $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-zen-fallback.conf.tpl \
       | arch-chroot /mnt tee /boot/loader/entries/arch-linux-zen-fallback.conf
-  ) || exit 900
 
-  _log 'Setting silent...'
-
-  (set -ex
     arch-chroot /mnt setterm -cursor on >> /etc/issue
 
     arch-chroot /mnt tee /etc/sysctl.d/20-quiet.conf \
@@ -59,5 +55,5 @@ _main() {
 
     arch-chroot /mnt systemctl enable getty@tty7.service \
       && arch-chroot /mnt systemctl disable getty@tty1.service
-  ) || exit 901
+  ) || exit
 }

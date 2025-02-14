@@ -7,5 +7,5 @@ _main() {
 
   (set -ex
     arch-chroot /mnt systemctl enable firewalld.service
-  ) || exit 404
+  ) || exit
 }

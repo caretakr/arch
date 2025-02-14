@@ -10,7 +10,7 @@ After=-.mount
 What=/dev/disk/by-uuid/{{ efi_uuid }}
 Where=/efi
 Type=vfat
-Options=rw,nodev,noexec,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro
+Options=rw,noexec,nosuid,nodev,fmask=0077,dmask=0077,shortname=mixed,utf8,errors=remount-ro
 
 [Install]
 WantedBy=local-fs.target

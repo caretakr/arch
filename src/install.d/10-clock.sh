@@ -7,5 +7,5 @@ _main() {
 
   ( set -ex
     timedatectl set-ntp true
-  ) || exit 5
+  ) || exit
 }

@@ -12,5 +12,5 @@ _main() {
       < $(dirname "$0")/../src/assets/etc/systemd/system/reflector.service.d/override.conf
 
     arch-chroot /mnt systemctl enable reflector.timer
-  ) || exit 407
+  ) || exit
 }
