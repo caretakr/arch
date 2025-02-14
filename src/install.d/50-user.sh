@@ -27,13 +27,6 @@ _main() {
           && git \
             --git-dir=/home/caretakr/.dotfiles \
             --work-tree=/home/caretakr \
-            submodule \
-            update \
-            --init \
-            --recursive \
-          && git \
-            --git-dir=/home/caretakr/.dotfiles \
-            --work-tree=/home/caretakr \
             config \
             --local \
             status.showUntrackedFiles no
