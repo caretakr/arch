@@ -1,5 +1,5 @@
-title Arch Linux (Zen) [fallback]
-sort-key 03-arch-linux-zen-fallback
+title Arch (Zen) [fallback]
+sort-key 03-arch-zen-fallback
 linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen-fallback.img
-options cryptdevice=UUID={{ data_uuid }}:luks-{{ data_uuid }} root=/dev/mapper/luks-{{ data_uuid }}
+options rd.luks.uuid={{ data_uuid }} root=UUID={{ data_uuid }}
