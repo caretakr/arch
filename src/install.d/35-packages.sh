@@ -26,12 +26,7 @@ _main() {
       bluez-utils \
       brightnessctl \
       btop \
-      buildah \
-      clang \
       cliphist \
-      crane \
-      delve \
-      dive \
       dmidecode \
       dnsmasq \
       dosfstools \
@@ -47,8 +42,6 @@ _main() {
       git \
       gnome-themes-extra \
       gnupg \
-      go \
-      gopls \
       grim \
       grml-zsh-config \
       gst-libav \
@@ -65,15 +58,12 @@ _main() {
       intel-ucode \
       iptables-nft \
       iwd \
-      jdk-openjdk \
       jq \
       kanshi \
       keepassxc \
       kubectl \
       kvantum \
-      ldd \
       less \
-      libc++ \
       libfido2 \
       libnotify \
       libsecret \
