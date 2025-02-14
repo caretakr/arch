@@ -130,7 +130,7 @@ _main() {
       swaylock \
       swtpm \
       terminus-font \
-      textinfo \
+      texinfo \
       tmux \
       trash-cli \
       ttf-firacode-nerd \
