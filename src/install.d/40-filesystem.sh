@@ -13,6 +13,7 @@ _main() {
   _boot_blockdev_target="blockdev@dev-disk-by\\\\x2duuid-$(echo "${_boot_uuid}" | sed 's/-/\\\\x2d/g').target"
   _efi_blockdev_target="blockdev@dev-disk-by\\\\x2duuid-$(echo "${_efi_uuid}" | sed 's/-/\\\\x2d/g').target"
   _root_blockdev_target="blockdev@dev-disk-by\\\\x2duuid-$(echo "${_root_uuid}" | sed 's/-/\\\\x2d/g').target"
+  _swap_blockdev_target="blockdev@dev-mapper-luks\\\\x2d$(echo "${_swap_uuid}" | sed 's/-/\\\\x2d/g').target"
 
   _boot_systemd_fsck_service="systemd-fsck@dev-disk-by\\\\x2duuid-$(echo "${_boot_uuid}" | sed 's/-/\\\\x2d/g').service"
   _efi_systemd_fsck_service="systemd-fsck@dev-disk-by\\\\x2duuid-$(echo "${_efi_uuid}" | sed 's/-/\\\\x2d/g').service"
@@ -51,16 +52,20 @@ _main() {
     arch-chroot /mnt systemctl enable efi.mount
 
     sed \
+      -e "s/{{ swap_blockdev_target }}/${_efi_blockdev_target}/g" \
       -e "s/{{ swap_uuid }}/${_swap_uuid}/g" \
       -e "s/{{ swap_uuid_device }}/${_swap_uuid_device}/g" \
-      $(dirname "$0")/../src/assets/etc/systemd/system/dev-mapper-swap.service.tpl \
-      | arch-chroot /mnt tee /etc/systemd/system/dev-mapper-swap.service
+      $(dirname "$0")/../src/assets/etc/systemd/system/swap.service.tpl \
+      | arch-chroot /mnt tee /etc/systemd/system/swap.service
 
-    arch-chroot /mnt systemctl enable dev-mapper-swap.service
+    arch-chroot /mnt systemctl enable swap.service
 
-    arch-chroot /mnt tee /etc/systemd/system/dev-mapper-swap.swap \
-      < $(dirname "$0")/../src/assets/etc/systemd/system/dev-mapper-swap.swap
+    sed \
+      -e "s/{{ swap_blockdev_target }}/${_swap_blockdev_target}/g" \
+      -e "s/{{ swap_uuid }}/${_swap_uuid}/g" \
+      $(dirname "$0")/../src/assets/etc/systemd/system/swap.swap.tpl \
+      | arch-chroot /mnt tee /etc/systemd/system/swap.swap
 
-    arch-chroot /mnt systemctl enable dev-mapper-swap.swap
+    arch-chroot /mnt systemctl enable swap.swap
   ) || exit
 }
