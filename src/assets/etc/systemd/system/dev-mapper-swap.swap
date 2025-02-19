@@ -1,0 +1,11 @@
+[Unit]
+Description=Swap on /dev/mapper/swap
+Requires=dev-mapper-swap.service
+After=blockdev@dev-mapper-swap.target
+After=dev-mapper-swap.service
+
+[Swap]
+What=/dev/mapper/swap
+
+[Install]
+WantedBy=swap.target
