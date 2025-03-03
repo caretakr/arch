@@ -7,14 +7,14 @@
 set -e
 
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root: exiting..."; exit 1
+  echo "Please run as root: exiting..."; exit
 fi
 
 if [ "$(uname)" != 'Linux' ]; then
-  echo 'Only supported on Linux: exiting...'; exit 1
+  echo 'Only supported on Linux: exiting...'; exit
 fi
 
-INSTALL_HOME="$(mktemp -d -t install-XXXXXXXX)"
+INSTALL_HOME="$(mktemp -d -p /var/tmp -t install-XXXXXXXX)"
 
 _cleanup() {
   rm -rf "$INSTALL_HOME"
@@ -49,17 +49,24 @@ _main() {
 
   ( set -x
     umask g-w,o-w
-  ) || exit 3
+  ) || exit
 
   _log 'Checking requirements...'
 
   ( set -x
     (command -v "git" > /dev/null 2>&1) || {
-      _error "Git not found: exiting..."
-      
-      exit 1
+      (pacman -Sy \
+        --needed \
+        --noconfirm \
+        --ask=4 \
+        git
+      ) || {
+        _error "Git not installed: exiting..."
+
+        exit
+      }
     }
-  ) || exit 4
+  ) || exit
 
   _log 'Cloning repository...'
 
@@ -78,16 +85,14 @@ _main() {
           rm -rf "$INSTALL_HOME" 2> /dev/null
         }
 
-        exit 1
+        exit
       }
-  ) || exit 5
+  ) || exit
 
-  _log 'Running installer...'
+  _log 'Running install...'
 
   cd "$INSTALL_HOME" \
     && ./bin/install.sh
 }
 
 _main
-
-exit 0

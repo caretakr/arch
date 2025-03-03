@@ -10,5 +10,5 @@ _main() {
       < $(dirname "$0")/../src/assets/etc/mkinitcpio.conf.d/override.conf
 
     arch-chroot /mnt mkinitcpio -P
-  ) || exit 42
+  ) || exit
 }

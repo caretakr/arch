@@ -10,5 +10,5 @@ _main() {
       base \
       linux \
       linux-firmware
-  ) || exit 17 
+  ) || exit
 }

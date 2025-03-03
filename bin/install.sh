@@ -30,48 +30,48 @@ _main() {
   _log 'Please provide the following:'
 
   _input 'Hostname' \
-    && read hostname
+    && read HOSTNAME
 
-  if [ -z "$hostname" ]; then
+  if [ -z "$HOSTNAME" ]; then
     _error 'Hostname not provided: exiting...'; exit
   fi
 
   _input 'Storage device' \
-    && read storage_device
+    && read STORAGE_DEVICE
 
-  if [ ! -b "/dev/$storage_device" ]; then
+  if [ ! -b "/dev/$STORAGE_DEVICE" ]; then
     _error 'Storage device not found: exiting...'; exit
   fi
 
   _input 'Data password' \
-    && read -s data_password \
+    && read -s DATA_PASSWORD \
     && printf "\n"
 
-  if [ -z "$data_password" ]; then
+  if [ -z "$DATA_PASSWORD" ]; then
     _error "Data password not provided: exiting..."; exit
   fi
 
   _input 'Data confirmation' \
-    && read -s data_confirmation \
+    && read -s DATA_CONFIRMATION \
     && printf "\n"
 
-  if [ "$data_password" != "$data_confirmation" ]; then
+  if [ "$DATA_PASSWORD" != "$DATA_CONFIRMATION" ]; then
     _error "Data password mismatch: exiting..."; exit
   fi
 
   _input 'User password' \
-    && read -s user_password \
+    && read -s USER_PASSWORD \
     && printf "\n"
 
-  if [ -z "$user_password" ]; then
+  if [ -z "$USER_PASSWORD" ]; then
     _error "User password not provided: exiting..."; exit
   fi
 
   _input 'User confirmation' \
-    && read -s user_confirmation \
+    && read -s USER_CONFIRMATION \
     && printf "\n"
 
-  if [ "$user_password" != "$user_confirmation" ]; then
+  if [ "$USER_PASSWORD" != "$USER_CONFIRMATION" ]; then
     _error "User password mismatch: exiting..."; exit
   fi
 

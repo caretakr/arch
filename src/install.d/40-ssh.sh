@@ -13,5 +13,5 @@ _main() {
       < $(dirname "$0")/../src/assets/etc/ssh/sshd_config.d/20-deny-root.conf
 
     arch-chroot /mnt systemctl enable sshd.service
-  ) || exit 45
+  ) || exit
 }

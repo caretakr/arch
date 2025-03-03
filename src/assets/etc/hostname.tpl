@@ -1,1 +1,1 @@
-{{ hostname }}
+{{ hostname }}.home.arpa

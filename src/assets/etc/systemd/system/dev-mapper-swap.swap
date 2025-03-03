@@ -1,5 +1,5 @@
 [Unit]
-Description=Swap for /dev/mapper/swap
+Description=Swap on /dev/mapper/swap
 Requires=dev-mapper-swap.service
 After=blockdev@dev-mapper-swap.target
 After=dev-mapper-swap.service

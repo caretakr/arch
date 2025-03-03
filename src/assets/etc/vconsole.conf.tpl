@@ -1,1 +1,2 @@
+FONT={{ font }}
 KEYMAP={{ keymap }}
