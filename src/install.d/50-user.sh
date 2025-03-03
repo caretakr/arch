@@ -29,7 +29,7 @@ _main() {
             --work-tree=/home/caretakr \
             config \
             --local \
-            status.showUntrackedFiles no
+            status.showUntrackedFiles no \
       "
   ) || exit
 
@@ -44,18 +44,16 @@ EOF
   _log 'Running install scripts...'
 
   (set -ex
-    arch-chroot /mnt sudo -u caretakr sh -c "
+    arch-chroot /mnt sudo -u caretakr sh -c " \
       if [ -d /home/caretakr/.arch/install.d ]; then \
-        for script in /home/caretakr/.arch/install.d/?*.sh; do
-          if [ -f "$script" ]; then
-            source "$script"
-
-            _main "$@"
-
-            unset -f _main
-          fi
-        done
-      fi
+        for script in /home/caretakr/.arch/install.d/?*.sh; do \
+          if [ -f "$script" ]; then \
+            source "$script" \
+              && _main "$@" ; \
+            unset -f _main \
+          ; fi \
+        ; done \
+      ; fi \
     "
   )
 
