@@ -31,6 +31,7 @@ _main() {
       intel-gpu-tools \
       intel-ucode \
       iwd \
+      libva \
       libva-utils \
       man-db \
       man-pages \
@@ -43,6 +44,7 @@ _main() {
       pipewire-jack \
       pipewire-pulse \
       plymouth \
+      polkit \
       reflector \
       sof-firmware \
       sudo \
