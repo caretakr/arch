@@ -55,9 +55,16 @@ _main() {
 
   ( set -x
     (command -v "git" > /dev/null 2>&1) || {
-      _error "Git not found: exiting..."
+      (pacman -S \
+        --needed \
+        --noconfirm \
+        --ask=4 \
+        git
+      ) || {
+        _error "Git not installed: exiting..."
 
-      exit
+        exit
+      }
     }
   ) || exit
 
