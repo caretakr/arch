@@ -55,7 +55,7 @@ _main() {
 
   ( set -x
     (command -v "git" > /dev/null 2>&1) || {
-      (pacman -S \
+      (pacman -Sy \
         --needed \
         --noconfirm \
         --ask=4 \
