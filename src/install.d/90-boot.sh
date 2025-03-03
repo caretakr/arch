@@ -15,33 +15,23 @@ _main() {
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-stable.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-stable.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-stable-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-stable-fallback.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-fallback.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-lts.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-lts.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-zen.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-zen.conf
 
     sed \
       -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-lts-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-lts-fallback.conf
-
-    sed \
-      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-zen.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-zen.conf
-
-    sed \
-      -e "s/{{ data_uuid }}/${_data_uuid}/g" \
-      $(dirname "$0")/../src/assets/boot/loader/entries/arch-zen-fallback.conf.tpl \
-      | arch-chroot /mnt tee /boot/loader/entries/arch-zen-fallback.conf
+      $(dirname "$0")/../src/assets/boot/loader/entries/arch-linux-zen-fallback.conf.tpl \
+      | arch-chroot /mnt tee /boot/loader/entries/arch-linux-zen-fallback.conf
 
     arch-chroot /mnt setterm -cursor on >> /etc/issue
 
