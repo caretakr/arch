@@ -40,7 +40,7 @@ caretakr ALL=(ALL) NOPASSWD: ALL
 EOF
   ) || exit
 
-  _log 'Running user install (if exists)...'
+  _log 'Running user install...'
 
   (set -ex
     if [ -f /mnt/home/caretakr/.arch/install.sh ]; then
