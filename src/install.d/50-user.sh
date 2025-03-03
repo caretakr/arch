@@ -40,23 +40,14 @@ caretakr ALL=(ALL) NOPASSWD: ALL
 EOF
   ) || exit
 
-  _log 'Running install scripts...'
+  _log 'Running user install (if exists)...'
 
   (set -ex
-    arch-chroot /mnt sudo -u caretakr sh -c '
-      if [ -d /home/caretakr/.arch/install.d ]; then
-        for script in /home/caretakr/.arch/install.d/?*.sh; do
-          if [ -f "$script" ]; then
-            source "$script"
-
-            _main "$@"
-
-            unset -f _main
-          fi
-        done
-      fi
-    '
-  )
+    if [ -f /mnt/home/caretakr/.arch/install.sh ]; then
+      arch-chroot /mnt chmod +x /home/caretakr/.arch/install.sh \
+        && arch-chroot /mnt sudo -u caretakr /home/caretakr/.arch/install.sh
+    fi
+  ) || exit
 
   _log 'Removing temporary sudo...'
 
