@@ -44,7 +44,7 @@ EOF
 
   (set -ex
     arch-chroot /mnt sudo -u caretakr sh -c '
-      git clone https://aur.archlinux.org/yay.git \
+      git clone https://aur.archlinux.org/yay-bin.git \
         /home/caretakr/.yay \
         && cd /home/caretakr/.yay \
         && makepkg -si --needed --noconfirm \
@@ -60,7 +60,6 @@ EOF
       librewolf-bin \
       rose-pine-cursor \
       rose-pine-hyprcursor \
-      yay-bin \
       zsh-theme-powerlevel10k-git
     "
 
