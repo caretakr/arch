@@ -40,18 +40,46 @@ caretakr ALL=(ALL) NOPASSWD: ALL
 EOF
   ) || exit
 
-  _log 'Running user install...'
+  _log 'Installing Yay...'
 
   (set -ex
-    if [ -f /mnt/home/caretakr/.arch/install.sh ]; then
-      arch-chroot /mnt chmod +x /home/caretakr/.arch/install.sh \
-        && arch-chroot /mnt sudo -u caretakr /home/caretakr/.arch/install.sh
-    fi
+    arch-chroot /mnt sudo -u caretakr sh -c '
+      git clone https://aur.archlinux.org/yay.git /home/caretakr/.yay
+        && cd /home/caretakr/.yay
+        && makepkg -si --needed --noconfirm
+        && yay -Y --gendb
+    '
+  ) || exit
+
+  _log 'Installing user packages...'
+
+  (set -ex
+    _packages=" \
+      downgrade \
+      librewolf-bin \
+      rose-pine-cursor \
+      rose-pine-hyprcursor \
+      yay-bin \
+      zsh-theme-powerlevel10k-git
+    "
+
+    arch-chroot /mnt sudo -u caretakr yay -S \
+      --needed \
+      --noconfirm \
+      --ask=4 \
+      $_packages
   ) || exit
 
   _log 'Removing temporary sudo...'
 
   (set -ex
     arch-chroot /mnt rm -rf /etc/sudoers.d/90-caretakr
+  ) || exit
+
+  _log 'Setting permanent sudo...'
+
+  (set -ex
+    arch-chroot /mnt tee /etc/sudoers.d/20-caretakr \
+      < $(dirname "$0")/../src/assets/etc/sudoers.d/20-caretakr
   ) || exit
 }
