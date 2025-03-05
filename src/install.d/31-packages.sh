@@ -202,8 +202,8 @@ _main() {
     for _package in $_packages; do
       arch-chroot /mnt sudo -u pacman sh -c '
         git clone https://aur.archlinux.org/'$_package'.git \
-          '$_pacman_home'/'$_package'
-          && cd '$_pacman_home'/'$_package'
+          '$_pacman_home'/'$_package' \
+          && cd '$_pacman_home'/'$_package' \
           && makepkg -si --needed --noconfirm
       '
     done

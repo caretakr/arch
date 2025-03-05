@@ -44,9 +44,10 @@ EOF
 
   (set -ex
     arch-chroot /mnt sudo -u caretakr sh -c '
-      git clone https://aur.archlinux.org/yay.git /home/caretakr/.yay
-        && cd /home/caretakr/.yay
-        && makepkg -si --needed --noconfirm
+      git clone https://aur.archlinux.org/yay.git \
+        /home/caretakr/.yay \
+        && cd /home/caretakr/.yay \
+        && makepkg -si --needed --noconfirm \
         && yay -Y --gendb
     '
   ) || exit
