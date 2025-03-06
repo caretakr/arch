@@ -52,6 +52,8 @@ EOF
     '
   ) || exit
 
+  rm -rf /mnt/home/caretakr/.yay
+
   _log 'Installing user packages...'
 
   (set -ex

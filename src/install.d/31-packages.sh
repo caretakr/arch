@@ -65,6 +65,7 @@ _main() {
       hyprpaper \
       hyprsunset \
       intel-gpu-tools \
+      intel-media-sdk \
       intel-ucode \
       iptables-nft \
       iwd \

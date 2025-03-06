@@ -14,14 +14,16 @@ _main() {
   SWAP_PARTITION="${_storage_prefix}3"
   DATA_PARTITION="${_storage_prefix}4"
 
-  _efi_start="2048"
-  _efi_size="$((1*512*2048))"
+  _sectors="$((512*4))" # 4K compatible
+
+  _efi_start="$((1*${_sectors}))"
+  _efi_size="$((512*${_sectors}))"
 
   _boot_start="$((${_efi_start}+${_efi_size}))"
-  _boot_size="$((1*1536*2048))"
+  _boot_size="$((1024*${_sectors}))"
 
   _swap_start="$((${_boot_start}+${_boot_size}))"
-  _swap_size="$(dmidecode -t 17 | grep "Size.*GB" | awk '{s+=$2} END {print s * 1024 * 1.5 * 2048}')"
+  _swap_size="$(dmidecode -t 17 | grep "Size.*GB" | awk '{s+=$2} END {print s*1024*1.5*'${_sectors}'}')"
 
   _data_start="$((${_swap_start}+${_swap_size}))"
 
@@ -67,20 +69,20 @@ _main() {
     sleep 1 # Wait a little to sync properly
 
     printf "$DATA_PASSWORD" | cryptsetup luksFormat \
-      "/dev/${DATA_PARTITION}" -d - \
+      "/dev/${DATA_PARTITION}" --sector-size 4096 -d - \
 
     printf "$DATA_PASSWORD" | cryptsetup luksOpen \
       "/dev/${DATA_PARTITION}" "luks-$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")" -d -
 
-    mkfs.fat -F 32 "/dev/${EFI_PARTITION}"
-    mkfs.fat -F 32 "/dev/${BOOT_PARTITION}"
+    mkfs.fat -S 4096 -F 32 "/dev/${EFI_PARTITION}"
+    mkfs.fat -S 4096 -F 32 "/dev/${BOOT_PARTITION}"
 
-    mkfs.ext2 -F "/dev/${SWAP_PARTITION}" 1M \
+    mkfs.ext2 -b 4096 -F "/dev/${SWAP_PARTITION}" 1M \
       && tune2fs -m 0 "/dev/${SWAP_PARTITION}"
 
     _data_uuid="$(blkid -s UUID -o value "/dev/${DATA_PARTITION}")"
 
-    mkfs.ext4 -F "/dev/mapper/luks-${_data_uuid}" \
+    mkfs.ext4 -b 4096 -F "/dev/mapper/luks-${_data_uuid}" \
       && tune2fs -m 1 "/dev/mapper/luks-${_data_uuid}"
 
     mount \
