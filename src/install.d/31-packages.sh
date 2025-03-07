@@ -95,6 +95,7 @@ _main() {
       noto-fonts-extra \
       openbsd-netcat \
       openssh \
+      passt \
       perl-file-mimeinfo \
       pinentry \
       pipewire \
