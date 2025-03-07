@@ -10,6 +10,7 @@ _main() {
       adwaita-icon-theme \
       alsa-plugins \
       alsa-utils \
+      base \
       base-devel \
       bluez \
       bluez-utils \
@@ -70,6 +71,8 @@ _main() {
       libva \
       libva-utils \
       libvirt \
+      linux \
+      linux-firmware \
       linux-zen \
       mailcap \
       man-db \
