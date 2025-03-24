@@ -58,11 +58,16 @@ EOF
 
   (set -ex
     _packages=" \
+      dockerfile-language-server \
       downgrade \
+      golangci-lint \
       librewolf-bin \
+      prettierd \
       rose-pine-cursor \
       rose-pine-hyprcursor \
-      zsh-theme-powerlevel10k-git
+      tmux-plugin-manager \
+      vtsls \
+      zsh-theme-powerlevel10k-git \
     "
 
     arch-chroot /mnt sudo -u caretakr yay -S \

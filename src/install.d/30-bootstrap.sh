@@ -10,20 +10,25 @@ _main() {
       adwaita-icon-theme \
       alsa-plugins \
       alsa-utils \
+      ansible-language-server \
       base \
       base-devel \
+      bash-language-server \
       bluez \
       bluez-utils \
       brightnessctl \
       btop \
       buildah \
+      clang \
       cliphist \
+      cpplint \
       dmidecode \
       dnsmasq \
       dosfstools \
       dunst \
       edk2-ovmf \
       efibootmgr \
+      eslint_d \
       exfatprogs \
       firewalld \
       foot \
@@ -31,10 +36,14 @@ _main() {
       fwupd \
       fzf \
       gcr \
+      gdb \
       gettext \
       git \
       gnome-themes-extra \
       gnupg \
+      go \
+      go-tools \
+      gopls \
       grim \
       grml-zsh-config \
       gstreamer \
@@ -71,9 +80,16 @@ _main() {
       libva \
       libva-utils \
       libvirt \
+      libc++ \
       linux \
       linux-firmware \
       linux-zen \
+      lld \
+      lldb \
+      llvm \
+      lua \
+      luajit \
+      luarocks \
       mailcap \
       man-db \
       man-pages \
@@ -81,10 +97,12 @@ _main() {
       mesa-utils \
       neovim \
       netavark \
+      nodejs \
       noto-fonts \
       noto-fonts-cjk \
       noto-fonts-emoji \
       noto-fonts-extra \
+      nvm \
       openbsd-netcat \
       openssh \
       passt \
@@ -97,9 +115,12 @@ _main() {
       pipewire-pulse \
       playerctl \
       plymouth \
+      pnpm \
       podman \
       polkit \
       polkit-gnome \
+      pyright \
+      python \
       qemu-full \
       qemu-user-static \
       qemu-user-static-binfmt \
@@ -114,6 +135,9 @@ _main() {
       reflector \
       ripgrep \
       rsync \
+      ruff \
+      rustup \
+      rust-analyzer \
       slurp \
       sof-firmware \
       sudo \
@@ -125,8 +149,12 @@ _main() {
       udiskie \
       udisks2 \
       unarchiver \
+      uv \
       vim \
       virt-manager \
+      vscode-css-languageserver \
+      vscode-html-languageserver \
+      vscode-json-languageserver \
       vulkan-icd-loader \
       vulkan-intel \
       vulkan-tools \
@@ -138,6 +166,7 @@ _main() {
       xdg-desktop-portal-hyprland \
       xdg-user-dirs \
       xdg-utils \
+      yaml-language-server \
       zoxide \
       zsh \
       zsh-autosuggestions \
