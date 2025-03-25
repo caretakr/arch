@@ -139,6 +139,7 @@ _main() {
       rustup \
       rust-analyzer \
       slurp \
+      socat \
       sof-firmware \
       sudo \
       swtpm \
