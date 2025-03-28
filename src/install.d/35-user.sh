@@ -44,8 +44,10 @@ EOF
 
   (set -ex
     arch-chroot /mnt sudo -u caretakr sh -c '
-      git clone https://aur.archlinux.org/yay-bin.git \
-        /home/caretakr/.yay \
+      source /home/caretakr/.zshenv \
+        && git clone \
+          https://aur.archlinux.org/yay-bin.git \
+          /home/caretakr/.yay \
         && cd /home/caretakr/.yay \
         && makepkg -si --needed --noconfirm \
         && yay -Y --gendb
@@ -65,16 +67,20 @@ EOF
       prettierd \
       rose-pine-cursor \
       rose-pine-hyprcursor \
+      terraform-ls \
       tmux-plugin-manager \
       vtsls \
       zsh-theme-powerlevel10k-git \
     "
 
-    arch-chroot /mnt sudo -u caretakr yay -S \
-      --needed \
-      --noconfirm \
-      --ask=4 \
-      $_packages
+    arch-chroot /mnt sudo -u caretakr sh -c '
+      source /home/caretakr/.zshenv \
+        && yay -S \
+        --needed \
+        --noconfirm \
+        --ask=4 \
+        '"$_packages"' \
+    '
   ) || exit
 
   _log 'Removing temporary sudo...'

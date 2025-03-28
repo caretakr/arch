@@ -10,6 +10,8 @@ _main() {
       adwaita-icon-theme \
       alsa-plugins \
       alsa-utils \
+      ansible \
+      ansible-lint \
       ansible-language-server \
       base \
       base-devel \
@@ -26,6 +28,7 @@ _main() {
       dnsmasq \
       dosfstools \
       dunst \
+      editorconfig-checker \
       edk2-ovmf \
       efibootmgr \
       eslint_d \
@@ -43,6 +46,7 @@ _main() {
       gnupg \
       go \
       go-tools \
+      gofumpt \
       gopls \
       grim \
       grml-zsh-config \
@@ -141,12 +145,16 @@ _main() {
       slurp \
       socat \
       sof-firmware \
+      stylelint \
       sudo \
       swtpm \
       terminus-font \
+      terraform \
       tmuxp \
       trash-cli \
       ttf-firacode-nerd \
+      ttf-nerd-fonts-symbols \
+      ttf-nerd-fonts-symbols-mono \
       udiskie \
       udisks2 \
       unarchiver \
@@ -167,6 +175,7 @@ _main() {
       xdg-desktop-portal-hyprland \
       xdg-user-dirs \
       xdg-utils \
+      yamllint \
       yaml-language-server \
       zoxide \
       zsh \
