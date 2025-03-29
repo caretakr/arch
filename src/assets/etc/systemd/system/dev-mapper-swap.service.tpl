@@ -18,7 +18,7 @@ RemainAfterExit=yes
 TimeoutSec=infinity
 KeyringMode=shared
 OOMScoreAdjust=500
-ExecStart=/usr/lib/systemd/systemd-cryptsetup attach 'swap' '/dev/disk/by-uuid/{{ swap_uuid }}' '/dev/urandom' 'swap,offset=2048,cipher=aes-xts-plain64,size=512'
+ExecStart=/usr/lib/systemd/systemd-cryptsetup attach 'swap' '/dev/disk/by-uuid/{{ swap_uuid }}' '/dev/urandom' 'swap,offset=2048,sector-size=4096,cipher=aes-xts-plain64,size=512'
 ExecStartPost=/usr/lib/systemd/systemd-makefs swap '/dev/mapper/swap'
 ExecStop=/usr/lib/systemd/systemd-cryptsetup detach 'swap'
 
