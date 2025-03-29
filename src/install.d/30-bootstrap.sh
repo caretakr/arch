@@ -7,6 +7,7 @@ _main() {
 
   (set -ex
     _packages=" \
+      actionlint \
       adwaita-icon-theme \
       alsa-plugins \
       alsa-utils \
@@ -23,6 +24,7 @@ _main() {
       buildah \
       clang \
       cliphist \
+      cppcheck \
       cpplint \
       deluge \
       deluge-gtk \
@@ -35,6 +37,7 @@ _main() {
       efibootmgr \
       eslint_d \
       exfatprogs \
+      fd \
       firewalld \
       foot \
       fscrypt \
@@ -144,16 +147,19 @@ _main() {
       ruff \
       rustup \
       rust-analyzer \
+      shellcheck \
       slurp \
       socat \
       sof-firmware \
       stylelint \
+      stylua \
       sudo \
       swtpm \
       terminus-font \
       terraform \
       tmuxp \
       trash-cli \
+      tree-sitter-cli \
       ttf-firacode-nerd \
       ttf-nerd-fonts-symbols \
       ttf-nerd-fonts-symbols-mono \
