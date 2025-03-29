@@ -24,6 +24,8 @@ _main() {
       clang \
       cliphist \
       cpplint \
+      deluge \
+      deluge-gtk \
       dmidecode \
       dnsmasq \
       dosfstools \
