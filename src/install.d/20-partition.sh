@@ -5,8 +5,8 @@
 _main() {
   _storage_prefix="$STORAGE_DEVICE"
 
-  if [[ "$storage_device" = nvme* ]]; then
-   _storage_prefix="${storage_prefix}p"
+  if [[ "$_storage_prefix" = nvme* ]]; then
+   _storage_prefix="${_storage_prefix}p"
   fi
 
   EFI_PARTITION="${_storage_prefix}1"
