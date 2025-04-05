@@ -14,7 +14,7 @@ _main() {
       secret \
       storage
     do
-      systemctl enable virt${driver}d{,-ro,-admin}.socket
+      arch-chroot /mnt systemctl enable virt${driver}d{,-ro,-admin}.socket
     done
 
     arch-chroot /mnt systemctl enable systemd-binfmt.service
