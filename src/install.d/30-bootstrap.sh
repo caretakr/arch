@@ -21,6 +21,7 @@ _main() {
       bluez-utils \
       brightnessctl \
       btop \
+      bubblewrap \
       buildah \
       clang \
       cliphist \
@@ -104,6 +105,7 @@ _main() {
       man-pages \
       mesa \
       mesa-utils \
+      mpv \
       neovim \
       netavark \
       nodejs \
@@ -155,6 +157,7 @@ _main() {
       stylua \
       sudo \
       swtpm \
+      systemd-resolvconf \
       terminus-font \
       terraform \
       tmuxp \
