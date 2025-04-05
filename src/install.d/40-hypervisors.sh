@@ -6,8 +6,16 @@ _main() {
   _log 'Setting hyprvisors...'
 
   (set -ex
-    arch-chroot /mnt systemctl enable libvirt.service
-    arch-chroot /mnt systemctl enable libvirt-guests.service
+    for driver in \
+      qemu \
+      network \
+      nodedev \
+      nwfilter \
+      secret \
+      storage
+    do
+      systemctl enable virt${driver}d{,-ro,-admin}.socket
+    done
 
     arch-chroot /mnt systemctl enable systemd-binfmt.service
   ) || exit
